@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Autos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="url"] {
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            background-color: #485049;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            align-self: center;
+        }
+        input[type="submit"]:hover {
+            background-color: #445244;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: #526152;
+        }
+        .img-preview {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            background-color: #485049;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #445244;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="btn-container">
+            <a href="{{ url_for('autos_registrados') }}" class="btn">Ver Autos Registrados</a>
+        </div>
+        <h1>Registro de Autos</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="idTipoAuto">ID Tipo de Auto:</label>
+            <input type="number" id="idTipoAuto" name="idTipoAuto" required>
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" required>
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            <label for="precio">Precio Unitario (Q):</label>
+            <input type="number" id="precio" name="precio" step="0.01" required>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+            <label for="imagen">Insertar Imagen:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+            <input type="submit" value="Registrar Auto">
+        </form>
+        {% if imagen_url %}
+        <div class="img-preview">
+            <h3>Vista Previa de la Imagen</h3>
+            <img src="{{ imagen_url }}" alt="Vista previa">
+        </div>
+        {% endif %}
+        {% if mensaje %}
+        <p class="message">{{ mensaje }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
